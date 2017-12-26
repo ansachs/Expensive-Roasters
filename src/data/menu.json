@@ -1,0 +1,37 @@
+{"appetizers": [{
+      "name" : "Egg Roll",
+      "description" : "Crispy stuffed rolls",
+      "price" : "1.00"
+    },
+    {
+      "name" : "Chicken Wings",
+      "description" : "Fried Chicken Wings",
+      "price" : "1.00"
+      
+  }], "soup" : [{
+      "name" : "Wonton Soup",
+      "description" : "soup with wontons",
+      "price" : "1.00"
+    }, 
+    {
+      "name" : "Hot and Sour Soup",
+      "description" : "sweet syrupy soup",
+      "price" : "1.00"
+
+  }], "beef" :[{
+      "name" : "Ginger Beef",
+      "description" : "gingery beef",
+      "price" : "1.00"
+    
+
+  }], "chicken" : [{
+      "name" : "Orange chicken", 
+      "description" : "crispy sweet chicken",
+      "price" : "1.00"
+
+  }], "noodles": [{
+      "name" : "Chow Mein", 
+      "description" : "noodles with other stuff",
+      "price" : "1.00"
+  }]
+}
