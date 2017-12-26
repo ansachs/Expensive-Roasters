@@ -7,7 +7,7 @@ class AddItem extends Component {
     return (
       
       <div>
-        <button>click to add an item</button>
+        
       </div>
     );
   }

@@ -4,9 +4,11 @@ import Item from './Item'
 
 
 
+
 class Menu extends Component {
+
   render() {
-    console.log('adsgdfgf')
+    // console.log('adsgdfgf') 
 
     return (
       
