@@ -1,8 +1,9 @@
-import {observable, computed, autorun} from 'mobx';
+import {observable, computed, autorun, action} from 'mobx';
+import {observer} from 'mobx-react';
 import StartMenu from "../data/menu.json"
 
 class MenuStore {
-  menuItems = observable({});
+  menuItems = observable.map({});
 
   constructor(startMenu) {
       this.loadMenu(StartMenu)
@@ -15,18 +16,35 @@ class MenuStore {
         let newItem = new Item(item['name'], item['description'], item['price'])
         return newItem;
       })
-      // category.forEach((item)=>{
-      //   
-      // }) 
     }
   }
 
-  newItem(category, name, description, price){
-    let newItem = new Item(name, description, price)
-    if (this.menuItems[category] === null) {
-      this.newCategory(category)
+  newItem(itemInfo){
+    
+    const newItem = new Item(itemInfo["name"], itemInfo["description"], itemInfo["price"])
+    
+    if (this.menuItems[itemInfo["category"]] == undefined) {
+      this.newCategory(itemInfo["category"])
     } 
-    this.menuItems[category].push(newItem)
+    
+    this.menuItems[itemInfo["category"]].push(newItem)
+    console.log(this.menuItems)
+  }
+
+  editItem(item, category, values) {
+    console.log(category)
+    // const newMenu = this.menuItems
+    this.menuItems[category] = this.menuItems[category].filter((oldItem)=>{oldItem['name'] !== item['name']})
+    // this.menuItems = newMenu
+    console.log(this.menuItems[category])
+    if (this.menuItems[values["category"]] == undefined) {
+      this.newCategory(values["category"])
+    } 
+    const newItem = new Item(values["name"], values["description"], values["price"])
+    console.log(newItem)
+    this.menuItems[values["category"]].push(newItem)
+    Object.assign(this.menuItems, this.menuItems)
+    console.log(this.menuItems)
   }
 
   newCategory(category){

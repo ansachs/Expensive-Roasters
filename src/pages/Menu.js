@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import Category from '../components/menu/Category'
 import MenuStore from '../stores/menuStore'
 // import StartMenu from "../data/menu.json"
-import {observer} from 'mobx-react';
+import {observer, Provider} from 'mobx-react';
 import AddItem from '../components/menu/addItem'
-import PopUpItem from '../components/menu/popUpItem'
+
+import Test from '../components/menu/test'
 
 
 const Menu = observer(class Menu extends Component {
@@ -17,25 +18,28 @@ const Menu = observer(class Menu extends Component {
 
   toggleAddItem() {
     this.setState({popUp:!this.state.popUp})
-    console.log('run popUp')
   }
 
   render() {
+    console.log(MenuStore.menuItems.entries())
     const categories = Object.keys(MenuStore.menuItems)
-    
+    const categoryView = categories.map((category)=>{
+            return (<Category category={category} items={MenuStore.menuItems[category]} />)
+            })
+    // const addItemButton = <button onClick={()=>{this.toggleAddItem()}}>click to add an item</button>
+    // const popUp = this.state.popUp ? <AddItem popUpState={()=>{this.toggleAddItem()}}/> : null
 
-    return (
-      
-      <div >
-        test
-        <ul>
-          {categories.map((category)=>{
-            return <Category category={category} items={MenuStore.menuItems[category]}/>
-          })}
-        </ul>
-        <button onClick={()=>{this.toggleAddItem()}}>click to add an item</button>
-        {this.state.popUp ? <PopUpItem popUpState={()=>{this.toggleAddItem()}}/> : null}
-      </div>
+    return (  
+      <Provider menu={MenuStore} > 
+        <div >
+          {/*<Test />*/}
+          <ul>
+            {categoryView}
+          </ul>
+        {/*  {addItemButton}
+          {popUp}*/}
+        </div>
+      </Provider>
     );
   }
 })

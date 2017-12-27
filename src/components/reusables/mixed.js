@@ -14,22 +14,22 @@ export function modal(header, body, submit, close) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button onClick={()=>{submit(); close()}}>Close</Button>
+        <Button onClick={()=>{submit(); close()}}>submit</Button>
       </Modal.Footer>
 
     </Modal.Dialog>
   </div>
 )}
 
-export function bootForm(item, value=null) {
+export function bootForm(item, value="", callBack) {
 
   return(
-        <FormGroup controlId={item}>
+        <FormGroup controlId={item} key={item}>
           <FormControl
             type="text"
             value={value}
             placeholder={item}
-            onChange={(event)=>{console.log(event.target)}}
+            onChange={callBack}
           />
         </FormGroup>
     )
