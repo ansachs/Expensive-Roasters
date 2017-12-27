@@ -22,12 +22,12 @@ const Menu = observer(class Menu extends Component {
 
   render() {
     console.log(MenuStore.menuItems.entries())
-    const categories = Object.keys(MenuStore.menuItems)
+    const categories = MenuStore.menuItems.keys()
     const categoryView = categories.map((category)=>{
-            return (<Category category={category} items={MenuStore.menuItems[category]} />)
+            return (<Category category={category} items={MenuStore.menuItems.get(category)} />)
             })
-    // const addItemButton = <button onClick={()=>{this.toggleAddItem()}}>click to add an item</button>
-    // const popUp = this.state.popUp ? <AddItem popUpState={()=>{this.toggleAddItem()}}/> : null
+    const addItemButton = <button onClick={()=>{this.toggleAddItem()}}>click to add an item</button>
+    const popUp = this.state.popUp ? <AddItem popUpState={()=>{this.toggleAddItem()}}/> : null
 
     return (  
       <Provider menu={MenuStore} > 
@@ -36,8 +36,8 @@ const Menu = observer(class Menu extends Component {
           <ul>
             {categoryView}
           </ul>
-        {/*  {addItemButton}
-          {popUp}*/}
+          {addItemButton}
+          {popUp}
         </div>
       </Provider>
     );

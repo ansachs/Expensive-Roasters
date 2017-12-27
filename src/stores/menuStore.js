@@ -12,10 +12,12 @@ class MenuStore {
 
   loadMenu(startMenu) {
     for (let category in startMenu) {
-      this.menuItems[category] = startMenu[category].map((item)=>{
+      let tempArray = [];
+      startMenu[category].forEach((item)=>{
         let newItem = new Item(item['name'], item['description'], item['price'])
-        return newItem;
+        tempArray.push(newItem)
       })
+      this.menuItems.set(category,tempArray)
     }
   }
 

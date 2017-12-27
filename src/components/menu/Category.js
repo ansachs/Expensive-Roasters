@@ -16,9 +16,9 @@ const Menu = observer(class Menu extends Component {
         <li> 
           <h2> {this.props.category} </h2>
           <ul>
-            {/*this.props.items.map((item)=>{
+            {this.props.items.map((item)=>{
               return <ItemView item={item} category={this.props.category} />
-            })*/}
+            })}
           </ul>
         </li>
       </div>
