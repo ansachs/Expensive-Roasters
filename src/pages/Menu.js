@@ -21,10 +21,12 @@ const Menu = observer(class Menu extends Component {
   }
 
   render() {
-    console.log(MenuStore.menuItems.entries())
-    const categories = MenuStore.menuItems.keys()
-    const categoryView = categories.map((category)=>{
-            return (<Category category={category} items={MenuStore.menuItems.get(category)} />)
+    // console.log(MenuStore.menuItems.entries())
+    // const categories = MenuStore.menuItems.keys()
+    const categoryView = MenuStore.categories.map((category, index)=>{
+            console.log(index)
+            return (<Category category={category} count={index} items={MenuStore.menuItems.get(category)} />)
+
             })
     const addItemButton = <button onClick={()=>{this.toggleAddItem()}}>click to add an item</button>
     const popUp = this.state.popUp ? <AddItem popUpState={()=>{this.toggleAddItem()}}/> : null
@@ -33,7 +35,7 @@ const Menu = observer(class Menu extends Component {
       <Provider menu={MenuStore} > 
         <div >
           {/*<Test />*/}
-          <ul>
+          <ul style={{'list-style':'none'}}>
             {categoryView}
           </ul>
           {addItemButton}
