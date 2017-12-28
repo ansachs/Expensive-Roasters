@@ -21,8 +21,8 @@ const Menu = inject('menu')(observer(class Menu extends Component {
         <li> 
           <h2 onDoubleClick={(event)=>{this.changeCategory()}}> {this.props.category} </h2>
           <ul style={{'list-style':'none'}}>
-            {this.props.items.map((item)=>{
-              return <ItemView item={item} category={this.props.category} />
+            {this.props.items.map((item, index)=>{
+              return <ItemView item={item} count={index} category={this.props.category} />
             })}
           </ul>
         </li>
