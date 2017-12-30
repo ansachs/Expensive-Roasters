@@ -1,15 +1,12 @@
-import {observable, computed, autorun, action, isObservableArray, extendObservable} from 'mobx';
+import {observable, computed, autorun, action} from 'mobx';
 import {observer} from 'mobx-react';
 import StartMenu from "../data/menu.json"
 import { sort } from 'lodash'
-
-export const tax = .07;
 
 class MenuStore {
   menuItems = observable.map({});
   categories = observable([]);
   order = observable([]);
-
 
   constructor(startMenu) {
       this.loadMenu(StartMenu)
@@ -85,66 +82,15 @@ class MenuStore {
     modifiedItems.splice(index, 1);
     this.menuItems.set(category, modifiedItems);
   }
-
-  findItem(item, array){
-    return this.order.findIndex((items) => {return (items['name'] === item['name'])}) 
-  }
-
-
-  addOrderItem(item, category) {
-    let index = this.findItem(item, this.order)
-    if (index > -1) {
-      this.order[index]['quantity'] = this.order[index]['quantity'] + 1;
-    } else {
-      const newOrderItem = new orderItem(item)
-      this.order.push(newOrderItem)
-    }
-    console.log(this.order.slice())
-    // console.log(isObservableArray(this.order))
-  }
-
-  addOrderQuantity(index) {
-    this.order[index]['quantity'] ++;
-  }
-
-  subtractOrderQuantity(index){
-    if (this.order[index]['quantity'] > 1)
-      this.order[index]['quantity'] --;
-  }
-
-  deleteOrderItem(index){
-    this.order.splice(index, 1)
-  }
-
-  calculateOrderTotal(){
-    // const tax = 0.07;
-    console.log('calc was run')
-    const preTax = this.order.reduce((a, curr)=>{ return a + parseInt(curr['price']) * curr['quantity']},0)
-
-    return {pretax: preTax, tax: tax}
-  }
-
-//   function orderItem({
-//   quantity = observable(null);
-
-//   constructor(item, quantity = 1){
-//     this.category = item["category"];
-//     this.name = item["name"];
-//     this.price = item["price"];
-//     this.quantity = quantity
-//   }
-// })
-
   
 }
 
 
-
 export class Item {
-    // category = observable(null);
-    // name = observable(null);
-    // description = observable(null);
-    // price = observable(null);
+    category = observable(null);
+    name = observable(null);
+    description = observable(null);
+    price = observable(null);
  
     constructor(category, name, description, price){
       this.category = category;
@@ -153,18 +99,5 @@ export class Item {
       this.price = price;
     }
 }
-
-export class orderItem{
-  // quantity = observable(0); 
-
-  constructor(item, quantity = 1){
-    extendObservable(this, {quantity: quantity})
-    this.category = item["category"];
-    this.name = item["name"];
-    this.price = item["price"];
-    this.quantity = quantity
-  }
-}
-
 
 export default new MenuStore(StartMenu);

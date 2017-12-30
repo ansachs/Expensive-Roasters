@@ -46,7 +46,7 @@ const Menu = observer(class Menu extends Component {
             {addItemButton}
             {popUp}
           </Col>
-          <Col>
+          <Col xs={4}>
             <Tabulate />
           </Col>
         </Row>

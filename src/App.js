@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Menu from './pages/Menu';
+import Devtools from 'mobx-react-devtools'
 
 class App extends Component {
   render() {
@@ -8,6 +9,7 @@ class App extends Component {
     return (
       
       <div className="App">
+        <Devtools />
         <Menu />
       </div>
     );

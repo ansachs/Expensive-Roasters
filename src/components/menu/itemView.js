@@ -32,7 +32,7 @@ var ItemView = inject('menu')(observer(class ItemView extends Component {
       <li>
         <Row>
           <Col xs={2}></Col>
-          <Col xs={6} className="text-right" onDoubleClick={()=>{this.toggleEditItem()}}> {this.props.item['name']} - {this.props.item['description']} - {this.props.item['price']}</Col>
+          <Col xs={6} className="text-right" onClick={()=>{this.props.menu.addOrderItem(this.props.item, this.props.category)}} onDoubleClick={()=>{this.toggleEditItem()}}> {this.props.item['name']} - {this.props.item['description']} - {this.props.item['price']}</Col>
           <Col xs={1} bsSize="small" onClick={()=>{this.props.menu.deleteItem(this.props.category, this.props.count)}}><Glyphicon glyph="remove" /></Col>
           <Col xs={3}> </Col>
         </Row>
