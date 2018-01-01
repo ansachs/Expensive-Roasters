@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
+import {Row, Col} from 'react-bootstrap'
+import {observer, Provider, inject} from 'mobx-react';
+
 import Category from '../components/menu/Category'
-import MenuStore from '../stores/menuStore'
-// import StartMenu from "../data/menu.json"
-import {observer, Provider} from 'mobx-react';
-import AddItem from '../components/menu/addItem'
+// import MenuStore from '../stores/menuStore'
+
 import Tabulate from '../components/form/tabulate'
 
-import Test from '../components/menu/test'
-import {Row, Col} from 'react-bootstrap'
 
 
-const Menu = observer(class Menu extends Component {
+
+const Menu = inject('menu')(observer(class Menu extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -25,34 +25,31 @@ const Menu = observer(class Menu extends Component {
   render() {
     // console.log(MenuStore.menuItems.entries())
     // const categories = MenuStore.menuItems.keys()
-    const categoryView = MenuStore.categories.map((category, index)=>{
-            // console.log(index)
-            return (<Category category={category} count={index} items={MenuStore.menuItems.get(category)} />)
-
+    const categoryView = this.props.menu.categories.map((category, index)=>{
+            return (
+              <Category category={category} count={index} key={index} items={this.props.menu.menuItems.get(category)} />
+              )
             })
-    const addItemButton = (
-      <button onClick={()=>{this.toggleAddItem()}}>click to add an item</button>
-      )
-    const popUp = this.state.popUp ? <AddItem popUpState={()=>{this.toggleAddItem()}}/> : null
 
     return (  
-      <Provider menu={MenuStore} > 
+      
         <Row>
-          <Col xs={8}>
-            {/*<Test />*/}
-            <ul style={{'list-style':'none'}}>
-              {categoryView}
-            </ul>
-            {addItemButton}
-            {popUp}
+          <Col xs={2}>
           </Col>
-          <Col xs={4}>
+          <Col xs={5}>
+            <ul style={{'listStyle':'none'}}>
+            {categoryView}
+            </ul>
+          </Col>
+          <Col xs={3}>
             <Tabulate />
           </Col>
+          <Col xs={2}>
+          </Col >
         </Row>
-      </Provider>
+      
     );
   }
-})
+}))
 
 export default Menu;

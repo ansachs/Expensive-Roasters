@@ -28,10 +28,19 @@ class MenuStore {
     }
   }
 
+  checkInvalid(name) {
+    if (name === "" || typeof name !== 'string') {
+      return true;
+    } 
+    return false;
+  }
+
   newItem(itemInfo){
     // console.log(itemInfo)
     if (this.menuItems.has(itemInfo["name"])) {
       alert("please add an item with a unique name")
+    } else if (this.checkInvalid(itemInfo["category"]), this.checkInvalid(itemInfo["name"]) || itemInfo["description"] || this.checkInvalid(itemInfo["price"])) {
+      alert("all values must be valid")
     } else {
       const newItem = new Item(itemInfo["category"], itemInfo["name"], itemInfo["description"], itemInfo["price"])
       if (!this.menuItems.has(itemInfo["category"])) {
@@ -45,6 +54,8 @@ class MenuStore {
   renameCategory(oldName, newName, index){
     if (this.menuItems.has(newName)) {
       alert("cannot change name to existing category")
+    } else if (this.checkInvalid(newName)) {
+      alert("invalid name");
     } else if (oldName !== newName) {
       // console.log(oldName, newName, index)
       this.categories[index] = newName;
@@ -56,19 +67,24 @@ class MenuStore {
   }
 
   newCategory(category){
-    this.menuItems.set(category, []);
+    if (this.checkInvalid(category)) {
+      alert("invalid name")
+    } else {
+      this.categories.push(category)
+      this.menuItems.set(category, []);
+    }
   }
 
   editItem(oldItem, category, replaceItem, index) {
     console.log(this.menuItems.get(category).slice(), category, replaceItem, index)
     const newItem = new Item(replaceItem["category"], replaceItem["name"], replaceItem["description"], replaceItem["price"]);
 
-    if (!this.menuItems.has(newItem["category"])) {
-      console.log('new cat')
+    if (this.checkInvalid(replaceItem["category"]), this.checkInvalid(replaceItem["name"]) || replaceItem["description"] || this.checkInvalid(replaceItem["price"])) {
+      alert("all values must be valid")
+    } else if(!this.menuItems.has(newItem["category"])) {
         this.newCategory(newItem["category"]);
         this.categories.push(newItem["category"]);
     } else if (category !== newItem["category"]) {
-      console.log('moved cat')
         this.menuItems.get(newItem["category"]).push(newItem);
         this.menuItems.get(category).splice(index,1)
     } else {
