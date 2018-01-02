@@ -23,7 +23,7 @@ const Menu = inject('menu')(observer(class Menu extends Component {
   }
 
   render() {
-    // console.log(MenuStore.menuItems.entries())
+    console.log("asdfadsfads")
     // const categories = MenuStore.menuItems.keys()
     const categoryView = this.props.menu.categories.map((category, index)=>{
             return (

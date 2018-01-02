@@ -25,7 +25,7 @@ var ItemView = inject('menu')(observer(class ItemView extends Component {
   // }
 
   render() {
-    const popUp = this.state.popUp ? <PopUpItem popUpState={()=>{this.toggleEditItem()}} item={this.props.item} category={this.props.category} newOrEdit={(values)=>{this.props.menu.editItem(this.props.item, this.props.category, values, this.props.count)}}/> : null
+    const popUp = this.state.popUp ? <PopUpItem popUpState={()=>{this.toggleEditItem()}} item={this.props.item} category={this.props.category} newOrEdit={(values)=>{this.props.menu.editItem(this.props.item, values)}}/> : null
 
     return (
       
@@ -33,7 +33,7 @@ var ItemView = inject('menu')(observer(class ItemView extends Component {
         <Row>
           <Col xs={2}></Col>
           <Col xs={6} className="text-right" onDoubleClick={()=>{this.toggleEditItem()}}> {this.props.item['name']} - {this.props.item['description']} - {this.props.item['price']}</Col>
-          <Col xs={1} bsSize="small" onClick={()=>{this.props.menu.deleteItem(this.props.category, this.props.count)}}><Glyphicon glyph="remove" /></Col>
+          <Col xs={1} bsSize="small" onClick={()=>{this.props.menu.deleteItem(this.props.item)}}><Glyphicon glyph="remove" /></Col>
           <Col xs={3}> </Col>
         </Row>
         {popUp}

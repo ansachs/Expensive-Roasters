@@ -1,4 +1,4 @@
-import {observable, computed, autorun, action} from 'mobx';
+/*import {observable, computed, autorun, action} from 'mobx';
 import {observer} from 'mobx-react';
 import StartMenu from "../data/menu.json"
 import { sort } from 'lodash'
@@ -100,4 +100,4 @@ export class Item {
     }
 }
 
-export default new MenuStore(StartMenu);
+export default new MenuStore(StartMenu);*/

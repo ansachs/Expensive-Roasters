@@ -6,7 +6,7 @@ const Menu = inject('menu')(observer(class Menu extends Component {
 
   changeCategory(){
     const newCategory = prompt("rename category:", this.props.category)
-    this.props.menu.renameCategory(this.props.category, newCategory, this.props.count)
+    this.props.menu.renameCategory(this.props.category, newCategory)
   }
 
   render() {

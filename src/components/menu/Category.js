@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import ItemView from './itemView'
 import {inject, observer} from 'mobx-react';
 
-const Menu = inject('menu')(observer(class Menu extends Component {
+const Category = inject('menu')(observer(class Category extends Component {
 
   
 
   render() {
- 
+    // console.log(this.props.items.slice())
     return (
       
       <div>
@@ -25,4 +25,4 @@ const Menu = inject('menu')(observer(class Menu extends Component {
   }
 }))
 
-export default Menu;
+export default Category;

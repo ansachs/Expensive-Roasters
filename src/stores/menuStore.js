@@ -36,10 +36,10 @@ class MenuStore {
   }
 
   newItem(itemInfo){
-    // console.log(itemInfo)
+
     if (this.menuItems.has(itemInfo["name"])) {
       alert("please add an item with a unique name")
-    } else if (this.checkInvalid(itemInfo["category"]), this.checkInvalid(itemInfo["name"]) || itemInfo["description"] || this.checkInvalid(itemInfo["price"])) {
+    } else if (this.checkInvalid(itemInfo["category"]) || this.checkInvalid(itemInfo["name"]) || this.checkInvalid(itemInfo["description"]) || this.checkInvalid(itemInfo["price"])) {
       alert("all values must be valid")
     } else {
       const newItem = new Item(itemInfo["category"], itemInfo["name"], itemInfo["description"], itemInfo["price"])
@@ -51,19 +51,18 @@ class MenuStore {
     }
   }
 
-  renameCategory(oldName, newName, index){
+  renameCategory(oldName, newName){
     if (this.menuItems.has(newName)) {
       alert("cannot change name to existing category")
     } else if (this.checkInvalid(newName)) {
       alert("invalid name");
     } else if (oldName !== newName) {
-      // console.log(oldName, newName, index)
+      let index = this.categories.findIndex((name)=>name === oldName)
       this.categories[index] = newName;
       let items = this.menuItems.get(oldName);
       this.menuItems.delete(oldName);
       this.menuItems.set(newName, items);
     }
-    // console.log(this.categories.slice())
   }
 
   newCategory(category){
@@ -75,47 +74,54 @@ class MenuStore {
     }
   }
 
-  editItem(oldItem, category, replaceItem, index) {
-    console.log(this.menuItems.get(category).slice(), category, replaceItem, index)
-    const newItem = new Item(replaceItem["category"], replaceItem["name"], replaceItem["description"], replaceItem["price"]);
+  editItem(oldItem, replaceItem) {
 
-    if (this.checkInvalid(replaceItem["category"]), this.checkInvalid(replaceItem["name"]) || replaceItem["description"] || this.checkInvalid(replaceItem["price"])) {
+    if (this.checkInvalid(oldItem["category"]) || this.checkInvalid(oldItem["name"]) || this.checkInvalid(oldItem["description"]) || this.checkInvalid(oldItem["price"])) {
       alert("all values must be valid")
-    } else if(!this.menuItems.has(newItem["category"])) {
-        this.newCategory(newItem["category"]);
-        this.categories.push(newItem["category"]);
-    } else if (category !== newItem["category"]) {
-        this.menuItems.get(newItem["category"]).push(newItem);
-        this.menuItems.get(category).splice(index,1)
     } else {
-      console.log('splice ran')
-      let values = this.menuItems.get(category).slice()
-      values.splice(index, 1, newItem)
-      this.menuItems.set(category, values)
+      let newItem = new Item(replaceItem["category"], replaceItem["name"], replaceItem["description"], replaceItem["price"]);
+      let index = this.menuItems.get(oldItem["category"]).find((item)=>item["name"] === oldItem["name"])
+      if(!this.menuItems.has(newItem["category"])) {
+          this.newCategory(newItem["category"]);
+          this.categories.push(newItem["category"]);
+          this.menuItems.get(newItem["category"]).push(newItem);
+
+      } else if (oldItem["category"] !== newItem["category"]) {
+          this.menuItems.get(newItem["category"]).push(newItem);
+          let oldItems = this.menuItems.get(oldItem["category"]).slice()
+          oldItems.splice(index, 1)
+      } else {
+        let oldItems = this.menuItems.get(oldItem["category"]).slice()
+        oldItems.splice(index, 1, newItem)
+        this.menuItems.set(oldItem["category"], oldItems)
+      }
     }
-    
   }
 
-  deleteItem(category, index) {
-    const modifiedItems = this.menuItems.get(category).slice();
-    modifiedItems.splice(index, 1);
-    this.menuItems.set(category, modifiedItems);
+  deleteItem(item) {
+    let index = this.findMenuItem(item);
+    let modifiedItems = this.menuItems.get(item["category"]).slice().splice(index, 1);
+    this.menuItems.set(item["category"], modifiedItems);
   }
 
-  findItem(item, array){
+  findMenuItem(item) {
+    return this.menuItems.get(item["category"]).findIndex((menuItem)=>menuItem["name"] === item["name"]) - 1
+  }
+
+  findItem(item){
     return this.order.findIndex((items) => {return (items['name'] === item['name'])}) 
   }
 
 
-  addOrderItem(item, category) {
-    let index = this.findItem(item, this.order)
+  addOrderItem(item) {
+    let index = this.findItem(item)
     if (index > -1) {
       this.order[index]['quantity'] = this.order[index]['quantity'] + 1;
     } else {
-      const newOrderItem = new orderItem(item)
+      let newOrderItem = new orderItem(item)
       this.order.push(newOrderItem)
     }
-    console.log(this.order.slice())
+    // console.log(this.order.slice())
     // console.log(isObservableArray(this.order))
   }
 
