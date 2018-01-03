@@ -12,10 +12,10 @@ var ItemView = inject('menu')(observer(class ItemView extends Component {
     
     return (
       
-      <li>
+      <li className="menu-items">
         <Row>
         
-          <Col xs={10} className="text-right" onClick={()=>{this.props.menu.addOrderItem(this.props.item, this.props.category)}} > {this.props.item['name']} - {this.props.item['description']} - {this.props.item['price']}</Col>
+          <Col xs={10} className="text-right" data-test="user-add" onClick={()=>{this.props.menu.addOrderItem(this.props.item)}} >{this.props.item['name']} - {this.props.item['description']} - {this.props.item['price']}</Col>
           
           
         </Row>

@@ -140,7 +140,6 @@ class MenuStore {
 
   calculateOrderTotal(){
     // const tax = 0.07;
-    console.log('calc was run')
     const preTax = this.order.reduce((a, curr)=>{ return a + parseInt(curr['price']) * curr['quantity']},0)
 
     return {pretax: preTax, tax: tax}

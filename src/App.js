@@ -12,7 +12,7 @@ import EditMenu from './pages/editMenu'
 // import Layout from './components/common/Layout';
 import Home from './pages/Home';
 import Login from './components/auth/Login';
-import Protected from './components/auth/Protected';
+// import Protected from './components/auth/Protected';
 import Navigation from './components/common/Navigation';
 import MenuStore from './stores/menuStore'
 
@@ -24,7 +24,6 @@ function onAuthRequired({history}) {
 
 class App extends Component {
   render() {
-    console.log(this.props.auth)
     return (
       <Provider menu={MenuStore} > 
         <section className="App">

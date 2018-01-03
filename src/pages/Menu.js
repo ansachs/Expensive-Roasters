@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Row, Col} from 'react-bootstrap'
 import {observer, Provider, inject} from 'mobx-react';
 
-import Category from '../components/menu/Category'
+import Category from '../components/menu/category'
 // import MenuStore from '../stores/menuStore'
 
 import Tabulate from '../components/form/tabulate'
@@ -23,7 +23,6 @@ const Menu = inject('menu')(observer(class Menu extends Component {
   }
 
   render() {
-    console.log("asdfadsfads")
     // const categories = MenuStore.menuItems.keys()
     const categoryView = this.props.menu.categories.map((category, index)=>{
             return (

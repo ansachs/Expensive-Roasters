@@ -8,7 +8,7 @@ var PopUpItem = inject('menu')(observer(class PopUpItem extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      category: this.props.category || "",
+      category: this.props.item? this.props.item["category"] : "",
       name: this.props.item ? this.props.item["name"] : "",
       description: this.props.item ? this.props.item["description"] : "",
       price: this.props.item ? this.props.item["price"] : ""

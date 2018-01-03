@@ -16,7 +16,6 @@ var ItemView = inject('menu')(observer(class ItemView extends Component {
 
 
   render() {
-    console.log(this.props.item)
 
     return (
       

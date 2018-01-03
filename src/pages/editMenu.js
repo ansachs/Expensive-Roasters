@@ -5,14 +5,14 @@ import {Row, Col} from 'react-bootstrap'
 // import MenuStore from '../stores/menuStore'
 
 
-import Category from '../components/editmenu/Category'
+import Category from '../components/editmenu/category'
 import AddItem from '../components/editmenu/addItem'
 import Tabulate from '../components/form/tabulate'
 
 
 
 
-const Menu = inject('menu')(observer(class Menu extends Component {
+const EditMenu = inject('menu')(observer(class EditMenu extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -33,7 +33,7 @@ const Menu = inject('menu')(observer(class Menu extends Component {
 
     const categoryView = this.props.menu.categories.map((category, index)=>{
             // console.log(index)
-            return (<Category category={category} count={index} items={this.props.menu.menuItems.get(category)} />)
+            return (<Category category={category} count={index} key={index} items={this.props.menu.menuItems.get(category)} />)
 
             })
 
@@ -68,4 +68,4 @@ const Menu = inject('menu')(observer(class Menu extends Component {
   }
 }))
 
-export default Menu;
+export default EditMenu;

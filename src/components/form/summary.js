@@ -18,10 +18,10 @@ const Summary = inject('menu')(observer(class Tabulate extends Component {
     const totalTax = (orderTotal.pretax * orderTotal.tax).toFixed(2)
     const total = (orderTotal.pretax * orderTotal.tax + orderTotal.pretax).toFixed(2)
     const form = (
-  <Table striped bordered condensed hover>
-    <thead style={{ 'border-bottom': '3'+'px', 'border-style':'solid'}}>
+  <Table striped bordered condensed hover data-test="order-summary">
+    <thead style={{ 'borderBottom': '3'+'px', 'borderStyle':'solid'}}>
       <tr>
-        <th> sub total </th>
+        <th> subtotal </th>
         <td>{orderTotal.pretax}</td>
       </tr>
            <tr>
@@ -37,7 +37,6 @@ const Summary = inject('menu')(observer(class Tabulate extends Component {
     </tbody>
   </Table>
     )
-    console.log(this.props.menu.order.slice().length )
     return(this.props.menu.order.slice().length > 0 ? form : null)
 
     // return (

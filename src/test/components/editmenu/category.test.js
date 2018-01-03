@@ -5,7 +5,7 @@ import { findDOMNode } from 'react-dom';
 import { observable, useStrict, extendObservable, toJS} from 'mobx';
 import {observer, Provider} from 'mobx-react';
 
-import Menu from '../../../pages/menu';
+import Category from '../../../components/editmenu/category';
 
 import Adapter from 'enzyme-adapter-react-16'
 import Enzyme from "enzyme";
@@ -15,7 +15,7 @@ import { shallow, simulate, mount } from 'enzyme'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-describe('Menu', () => {
+describe('EditMenu', () => {
   let testmenu;
   let component;
   let domElement;
@@ -40,48 +40,28 @@ describe('Menu', () => {
       order: observable([orderItem1]),
       calculateOrderTotal: ()=>{return {pretax: 10, tax: 0.07}},
       fetchTodos: jasmine.createSpy(),
-      addOrderItem: jasmine.createSpy()
+      addOrderItem: jasmine.createSpy(),
+      editItem: jasmine.createSpy(),
+      deleteItem: jasmine.createSpy(),
+      renameCategory: jasmine.createSpy()
     };
 
-    domElement = mount(
-        <Provider menu={testmenu} >
-          <Menu />
-        </Provider>
+  });
+
+  describe('edit functions', () => {
+    it('when a category is double clicked it creates an edit prompt and calls renameCategory', () => {
+
+      const domElement = shallow (
+        <Category.wrappedComponent menu={testmenu} items={testmenu.menuItems.get("beef")} category={"beef"} />
         )
-  });
 
-  describe('menu view', () => {
-    it('displays the list of categories', function(){
-
-      const items = domElement.find('.menu-categories')
-      const itemText = items.map((item)=>{return item.text()})
-
-      expect(itemText).toEqual(testmenu.categories.slice());
-    });
-
-    it('displays the list of items', function(){
-    
-      const itemText = domElement.find('.menu-items').map((item)=>{return item.text()})
-      const expecteOutput = getItems().map((item)=>{return `${item["name"]} - ${item["description"]} - ${item["price"]}`})
-
-      expect(itemText).toEqual(expecteOutput);
-    });
-  })
-
-  describe('user menu order', () => {
-    it('it adds an item to the order after it is clicked', () => {
+      // domElement.setState({popUp: false})
  
-      domElement.find('[data-test="user-add"]').first().simulate('click')
+      domElement.find('.menu-categories').first().simulate("doubleclick")
 
-      expect(testmenu.addOrderItem).toHaveBeenCalledWith(item2);
-    });
+      console.log(domElement.state())
 
-    it('it displays an order summary based on the order array', () => {
-
-      const itemText = domElement.find('[data-test="order-summary"]').first().text()
- 
-      expect(itemText).toContain('subtotal 10 tax 0.70 total 10.70');
+      expect(testmenu.renameCategory).toHaveBeenCalledWith("beef", undefined);
     });
   });
-
 });

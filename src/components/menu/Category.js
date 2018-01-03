@@ -12,7 +12,7 @@ const Category = inject('menu')(observer(class Category extends Component {
       
       <div>
         <li> 
-          <h2> {this.props.category} </h2>
+          <h2 className="menu-categories">{this.props.category}</h2>
           <ul style={{'listStyle':'none'}}>
             {this.props.items.map((item, index)=>{
               return <ItemView item={item} count={index} key={index} category={this.props.category} />

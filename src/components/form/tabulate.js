@@ -17,7 +17,7 @@ const Tabulate = inject('menu')(observer(class Tabulate extends Component {
 
 
 render() {
-  console.log('tabulate')
+  // console.log(this.props)
   const orderItems = (
     <ul style={{'listStyle':'none'}}>
               {this.props.menu.order.map((item, index)=>{
