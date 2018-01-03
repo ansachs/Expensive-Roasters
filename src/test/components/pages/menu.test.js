@@ -80,7 +80,7 @@ describe('Menu', () => {
 
       const itemText = domElement.find('[data-test="order-summary"]').first().text()
  
-      expect(itemText).toContain('subtotal 10 tax 0.70 total 10.70');
+      expect(itemText).toContain('subtotal$10tax$0.70total$10.70');
     });
   });
 

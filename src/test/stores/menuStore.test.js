@@ -7,6 +7,8 @@ describe('MenuStore', () => {
   useStrict(false)
   let menu = MenuStore;
   let validItem = {"category": "appetizers", "name": "shrimp lo mein", "description": "stir fried noodles with shrimp ", "price": "5.00" };
+  let invalidItem = {"category": "appetizers", "name": 123, "description": "stir fried noodles with shrimp ", "price": "bonkers" };
+
   let oldItem = {category: "beef", name: "Ginger Beef", description: "gingery beef", price: "1.00"}
   let newItemSameCat = {category: "beef", name: "orange Beef", description: "orange flavored beef", price: "1.00"}
   let newItemDiffCat = {category: "chicken", name: "orange Beef", description: "orange flavored beef", price: "1.00"}
@@ -38,6 +40,12 @@ describe('MenuStore', () => {
       let categoryItems = menu.menuItems.get('appetizers').slice();
       expect(categoryItems).toContainEqual(validItem);
     });
+
+    it('it will not add an invalid item', () => {
+      menu.newItem(invalidItem);
+      let categoryItems = menu.menuItems.get('appetizers').slice();
+      expect(categoryItems).not.toContainEqual(invalidItem);
+    });
   });
 
   describe('renameCategory', () => {
@@ -63,19 +71,20 @@ describe('MenuStore', () => {
       menu.editItem(oldItem, newItemSameCat);
       expect(menu.menuItems.get(oldItem["category"])).toContainEqual(newItemSameCat);
     });
-  });
 
-  describe('editItem', () => {
     it('removes old item and adds it to new category', () => {
       menu.editItem(oldItem, newItemDiffCat);
       expect(menu.menuItems.get(newItemDiffCat["category"])).toContainEqual(newItemDiffCat);
     });
-  });
 
-  describe('editItem', () => {
     it('removes old item and creates a new category', () => {
       menu.editItem(oldItem, newItemNewCat);
       expect(menu.menuItems.get(newItemNewCat["category"])).toContainEqual(newItemNewCat);
+    });
+
+    it('will not edit an item with new invalid data', () => {
+      menu.editItem(oldItem, invalidItem);
+      expect(menu.menuItems.get(invalidItem["category"])).not.toContainEqual(invalidItem);
     });
   });
 
@@ -105,8 +114,6 @@ describe('MenuStore', () => {
     });
   });
 
-
-
   describe('calculateOrderTotal', () => {
     it('calculates the totals for an order', () => {
       menu.addOrderItem(oldItem)
@@ -119,7 +126,5 @@ describe('MenuStore', () => {
     });
   });
   
-
-
 
 });

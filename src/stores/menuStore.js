@@ -35,17 +35,23 @@ class MenuStore {
     return false;
   }
 
+    // checkNaN(number) {
+    //   if (isNaN(number)) {
+    //     return true;
+    //   } 
+    //   return false;
+    // }
+
   newItem(itemInfo){
 
     if (this.menuItems.has(itemInfo["name"])) {
       alert("please add an item with a unique name")
-    } else if (this.checkInvalid(itemInfo["category"]) || this.checkInvalid(itemInfo["name"]) || this.checkInvalid(itemInfo["description"]) || this.checkInvalid(itemInfo["price"])) {
+    } else if (this.checkInvalid(itemInfo["category"]) || this.checkInvalid(itemInfo["name"]) || this.checkInvalid(itemInfo["description"]) || isNaN(itemInfo["price"])) {
       alert("all values must be valid")
     } else {
       const newItem = new Item(itemInfo["category"], itemInfo["name"], itemInfo["description"], itemInfo["price"])
       if (!this.menuItems.has(itemInfo["category"])) {
         this.newCategory(itemInfo["category"])
-        this.categories.push(itemInfo["category"])
       } 
       this.menuItems.get(itemInfo["category"]).push(newItem)
     }
@@ -76,7 +82,7 @@ class MenuStore {
 
   editItem(oldItem, replaceItem) {
 
-    if (this.checkInvalid(oldItem["category"]) || this.checkInvalid(oldItem["name"]) || this.checkInvalid(oldItem["description"]) || this.checkInvalid(oldItem["price"])) {
+    if (this.checkInvalid(replaceItem["category"]) || this.checkInvalid(replaceItem["name"]) || this.checkInvalid(replaceItem["description"]) || isNaN(replaceItem["price"])) {
       alert("all values must be valid")
     } else {
       let newItem = new Item(replaceItem["category"], replaceItem["name"], replaceItem["description"], replaceItem["price"]);
@@ -162,10 +168,6 @@ class MenuStore {
 
 
 export class Item {
-    // category = observable(null);
-    // name = observable(null);
-    // description = observable(null);
-    // price = observable(null);
  
     constructor(category, name, description, price){
       this.category = category;
@@ -176,7 +178,6 @@ export class Item {
 }
 
 export class orderItem{
-  // quantity = observable(0); 
 
   constructor(item, quantity = 1){
     extendObservable(this, {quantity: quantity})

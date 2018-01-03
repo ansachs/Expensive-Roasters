@@ -36,6 +36,7 @@ const Menu = inject('menu')(observer(class Menu extends Component {
           <Col xs={2}>
           </Col>
           <Col xs={5}>
+            <h2>Menu</h2>
             <ul style={{'listStyle':'none'}}>
             {categoryView}
             </ul>

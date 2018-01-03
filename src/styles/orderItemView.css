@@ -1,0 +1,17 @@
+.item-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.item-info {
+  text-align: right;
+}
+
+.delete {
+  padding-left: 0;
+}
+
+.icon {
+  padding-right: 1em;
+}

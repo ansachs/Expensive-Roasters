@@ -45,7 +45,7 @@ export default withAuth(class Navigation extends Component{
           <div className="navbar-collapse collapse">
             <ul className="nav navbar-nav navbar-right smooth-scroll">
               <li><Link to="/">Menu</Link></li>
-              <li><Link to="editmenu">Edit</Link></li>
+              <li><Link to="editmenu">Edit Menu</Link></li>
               <li><Link to="contact">Contact</Link></li>
               {logged}
               {/*<li><Link to="login">Login</Link></li>*/}
