@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { modal, bootForm } from '../reusables/mixed'
-import { Button, Modal, FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
-import {Item} from '../../stores/menuStore'
+
 import {inject, observer} from 'mobx-react';
 
 var PopUpItem = inject('menu')(observer(class PopUpItem extends Component {
@@ -16,7 +15,6 @@ var PopUpItem = inject('menu')(observer(class PopUpItem extends Component {
   }
 
   handleEvent(event){
-    // console.log(this.state)
     switch (event.target.id){
       case 'category':
         this.setState({category: event.target.value})
@@ -29,6 +27,8 @@ var PopUpItem = inject('menu')(observer(class PopUpItem extends Component {
         break;
       case 'price':
         this.setState({price: event.target.value})
+        break;
+      default:
         break;
     }
   }

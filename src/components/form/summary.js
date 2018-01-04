@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {inject, observer} from 'mobx-react';
-import {Row, Col, Glyphicon, Table, ButtonToolbar, Button} from 'react-bootstrap'
+import {Row, Table, ButtonToolbar, Button} from 'react-bootstrap'
 import '../../styles/summary.css'
 
 

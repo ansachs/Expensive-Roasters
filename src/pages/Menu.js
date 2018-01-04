@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Row, Col} from 'react-bootstrap'
-import {observer, Provider, inject} from 'mobx-react';
+import {observer, inject} from 'mobx-react';
 
 import Category from '../components/menu/category'
 // import MenuStore from '../stores/menuStore'

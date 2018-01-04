@@ -15,10 +15,6 @@ describe('MenuStore', () => {
   let newItemNewCat = {category: "drinks", name: "orange Beef", description: "orange flavored beef", price: "1.00"}
 
 
-
-  // beforeEach(() => {
-  //   todoStore = new TodoStore();
-  // });
   describe('checkInvalid', () => {
     it('return true for a non string or string of zero length', () => {
 

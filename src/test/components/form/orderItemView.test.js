@@ -5,7 +5,7 @@ import { findDOMNode } from 'react-dom';
 import { observable, useStrict, extendObservable, toJS} from 'mobx';
 import {observer, Provider} from 'mobx-react';
 
-import ItemView from '../../../components/editmenu/itemView';
+import ItemView from '../../../components/form/orderItemView';
 
 import Adapter from 'enzyme-adapter-react-16'
 import Enzyme from "enzyme";
@@ -15,7 +15,7 @@ import { shallow, simulate, mount } from 'enzyme'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-describe('EditMenu', () => {
+describe('OrderItem', () => {
   let testmenu;
   let component;
   let domElement;
@@ -27,6 +27,8 @@ describe('EditMenu', () => {
 
   let orderItem1 = {category: "appetizers", name: "shrimp lo mein", price: "5.00", quantity: 2 }
 
+  let orderItem2 = {category: "beef", name: "beef stir-fry", price: "2.00", quantity: 3 }
+
   let getItems = function() {
     const nonObsMenu = toJS(testmenu.menuItems);
     return Object.values(nonObsMenu).reduce((array, curr)=>{return array.concat(curr)},[]);
@@ -37,29 +39,40 @@ describe('EditMenu', () => {
     testmenu = {
       menuItems: observable.map({"beef": [item2, item3], "appetizers":[item1]}),
       categories: observable(["beef", "appetizers"]),
-      order: observable([orderItem1]),
+      order: observable([orderItem1, orderItem2]),
       calculateOrderTotal: ()=>{return {pretax: 10, tax: 0.07}},
       fetchTodos: jasmine.createSpy(),
       addOrderItem: jasmine.createSpy(),
       editItem: jasmine.createSpy(),
-      deleteItem: jasmine.createSpy()
+      deleteItem: jasmine.createSpy(),
+      renameCategory: jasmine.createSpy(),
+      deleteOrderItem: jasmine.createSpy(),
+      addOrderQuantity: jasmine.createSpy()
     };
 
   });
 
-  describe('edit functions', () => {
-    it('when an item is double clicked it creates a popup form', () => {
+  describe('tabulate', () => {
+    it('allows you to remove an item from the order', () => {
 
       const domElement = shallow (
-        <ItemView.wrappedComponent menu={testmenu} item={item1} />
+        <ItemView.wrappedComponent menu={testmenu} count={0} item={orderItem1}/>
         )
 
-      domElement.setState({popUp: false})
- 
-      domElement.find('[data-test="order-item"]').first().simulate("doubleclick")
+      domElement.find('.delete').simulate('click')
 
-      expect(domElement.state("popUp")).toEqual(true);
+      expect(testmenu.deleteOrderItem).toHaveBeenCalledWith(0)
+    });
+
+    it('allows you to change the amount of an item', () => {
+
+      const domElement = shallow (
+        <ItemView.wrappedComponent menu={testmenu} count={0} item={orderItem1}/>
+        )
+
+      domElement.find('[data-test="add-one"]').simulate('click')
+
+      expect(testmenu.addOrderQuantity).toHaveBeenCalledWith(0)
     });
   });
 });
-

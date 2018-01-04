@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import './App.css';
+import './styles/App.css';
 
-import {observer, Provider} from 'mobx-react';
+import { Provider} from 'mobx-react';
 import Devtools from 'mobx-react-devtools'
 
 import { Security, SecureRoute, ImplicitCallback } from '@okta/okta-react';
 
 import Menu from './pages/menu';
 import EditMenu from './pages/editMenu'
-// import Layout from './components/common/Layout';
-import Home from './pages/Home';
+
 import Login from './components/auth/Login';
-// import Protected from './components/auth/Protected';
+
 import Navigation from './components/common/Navigation';
 import MenuStore from './stores/menuStore'
 
@@ -27,8 +26,6 @@ class App extends Component {
     return (
       <Provider menu={MenuStore} > 
         <section className="App">
-          
-          <Devtools />
           <BrowserRouter>
             <div>
               {/*<Navigation />*/}

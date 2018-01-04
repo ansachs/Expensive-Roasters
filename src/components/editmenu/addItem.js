@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {inject, observer} from 'mobx-react';
 
 import PopUpItem from './popUpItem'
-// import {Item} from '../../stores/menuStore'
+
 
 var AddItem = inject('menu')(observer(class AddItem extends Component {
   render() {

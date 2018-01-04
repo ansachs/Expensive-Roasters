@@ -1,4 +1,4 @@
-import {Modal, Button, Form, FormControl, FormGroup } from 'react-bootstrap';
+import {Modal, Button, FormControl, FormGroup } from 'react-bootstrap';
 import React from 'react';
 
 export function modal(header, body, submit, close) { 

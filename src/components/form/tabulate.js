@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {inject, observer} from 'mobx-react';
-import {Row, Col, Glyphicon} from 'react-bootstrap'
+import {Row} from 'react-bootstrap'
 
 import ItemView from './orderItemView'
 import Summary from './summary'
-import tabulate from '../../styles/tabulate.css'
+import '../../styles/tabulate.css'
 
 
 const Tabulate = inject('menu')(observer(class Tabulate extends Component {
@@ -21,7 +21,7 @@ render() {
   const orderItems = (
     <ul style={{'listStyle':'none'}}>
               {this.props.menu.order.map((item, index)=>{
-                return <ItemView item={item} key={index} count={index} category={this.props.category} />
+                return <ItemView item={item} key={index} count={index} />
               })}
     </ul>
   )

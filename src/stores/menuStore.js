@@ -1,7 +1,5 @@
-import {observable, computed, autorun, action, isObservableArray, extendObservable} from 'mobx';
-import {observer} from 'mobx-react';
+import {observable, extendObservable} from 'mobx';
 import StartMenu from "../data/menu.json"
-import { sort } from 'lodash'
 
 export const tax = .07;
 
@@ -145,22 +143,10 @@ class MenuStore {
   }
 
   calculateOrderTotal(){
-    // const tax = 0.07;
-    const preTax = this.order.reduce((a, curr)=>{ return a + parseInt(curr['price']) * curr['quantity']},0)
+    const preTax = this.order.reduce((a, curr)=>{ return a + parseInt(curr['price'], 10) * curr['quantity']},0)
 
-    return {pretax: preTax, tax: tax}
+    return ({pretax: preTax, tax: tax})
   }
-
-//   function orderItem({
-//   quantity = observable(null);
-
-//   constructor(item, quantity = 1){
-//     this.category = item["category"];
-//     this.name = item["name"];
-//     this.price = item["price"];
-//     this.quantity = quantity
-//   }
-// })
 
   
 }

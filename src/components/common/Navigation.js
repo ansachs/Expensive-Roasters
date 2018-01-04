@@ -6,12 +6,8 @@ export default withAuth(class Navigation extends Component{
   constructor(props) {
     super(props);
     this.state = { authenticated: null };
-    // this.checkAuthentication = this.checkAuthentication.bind(this);
-    // this.checkAuthentication();
   }
-  // static contextTypes = {
-  //   user: React.PropTypes.object
-  // };
+
   async checkAuthentication() {
     const authenticated = await this.props.auth.isAuthenticated();
     if (authenticated !== this.state.authenticated) {
@@ -46,7 +42,7 @@ export default withAuth(class Navigation extends Component{
             <ul className="nav navbar-nav navbar-right smooth-scroll">
               <li><Link to="/">Menu</Link></li>
               <li><Link to="editmenu">Edit Menu</Link></li>
-              <li><Link to="contact">Contact</Link></li>
+              <li><a href="mailto:ansachs@gmail.com">Contact</a></li>
               {logged}
               {/*<li><Link to="login">Login</Link></li>*/}
             </ul>

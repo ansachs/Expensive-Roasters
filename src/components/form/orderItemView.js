@@ -26,7 +26,7 @@ var ItemView = inject('menu')(observer(class ItemView extends Component {
           <Col xs={1} className="delete" bsSize="small" onClick={()=>{this.props.menu.deleteOrderItem(this.props.count)}}><Glyphicon glyph="remove" /></Col>
           <Col xs={1} >
             <Row>
-              <Glyphicon className="icon" onClick={()=>this.props.menu.addOrderQuantity(this.props.count)} glyph="chevron-up" />
+              <Glyphicon className="icon" data-test="add-one" onClick={()=>this.props.menu.addOrderQuantity(this.props.count)} glyph="chevron-up" />
             </Row>
             <Row>
               <Glyphicon className="icon" onClick={()=>this.props.menu.subtractOrderQuantity(this.props.count)} glyph="chevron-down" />

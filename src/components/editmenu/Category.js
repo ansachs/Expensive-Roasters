@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import ItemView from './itemView'
 import {inject, observer} from 'mobx-react';
+
+import ItemView from './itemView'
 
 const Menu = inject('menu')(observer(class Menu extends Component {
 

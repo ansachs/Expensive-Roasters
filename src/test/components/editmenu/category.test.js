@@ -15,7 +15,7 @@ import { shallow, simulate, mount } from 'enzyme'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-describe('EditMenu', () => {
+describe('Category', () => {
   let testmenu;
   let component;
   let domElement;
@@ -54,12 +54,8 @@ describe('EditMenu', () => {
       const domElement = shallow (
         <Category.wrappedComponent menu={testmenu} items={testmenu.menuItems.get("beef")} category={"beef"} />
         )
-
-      // domElement.setState({popUp: false})
  
       domElement.find('.menu-categories').first().simulate("doubleclick")
-
-      console.log(domElement.state())
 
       expect(testmenu.renameCategory).toHaveBeenCalledWith("beef", undefined);
     });

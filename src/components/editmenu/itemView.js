@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {inject, observer} from 'mobx-react';
-import PopUpItem from './popUpItem'
 import {Row, Col, Glyphicon} from 'react-bootstrap'
 
+import PopUpItem from './popUpItem'
 
 
 var ItemView = inject('menu')(observer(class ItemView extends Component {

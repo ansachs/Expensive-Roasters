@@ -5,7 +5,7 @@ import { findDOMNode } from 'react-dom';
 import { observable, useStrict, extendObservable, toJS} from 'mobx';
 import {observer, Provider} from 'mobx-react';
 
-import ItemView from '../../../components/editmenu/itemView';
+import PopUpItem from '../../../components/editmenu/PopUpItem';
 
 import Adapter from 'enzyme-adapter-react-16'
 import Enzyme from "enzyme";
@@ -15,7 +15,7 @@ import { shallow, simulate, mount } from 'enzyme'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-describe('EditMenu', () => {
+describe('PopUpItem', () => {
   let testmenu;
   let component;
   let domElement;
@@ -42,24 +42,22 @@ describe('EditMenu', () => {
       fetchTodos: jasmine.createSpy(),
       addOrderItem: jasmine.createSpy(),
       editItem: jasmine.createSpy(),
-      deleteItem: jasmine.createSpy()
+      deleteItem: jasmine.createSpy(),
+      renameCategory: jasmine.createSpy()
     };
 
   });
 
-  describe('edit functions', () => {
-    it('when an item is double clicked it creates a popup form', () => {
+  describe('popup form', () => {
+    it('the popup form renders an input component for each key of the item passed in', () => {
 
-      const domElement = shallow (
-        <ItemView.wrappedComponent menu={testmenu} item={item1} />
+      const domElement = mount (
+        <PopUpItem menu={testmenu} item={item1} />
         )
-
-      domElement.setState({popUp: false})
  
-      domElement.find('[data-test="order-item"]').first().simulate("doubleclick")
+      let output = domElement.find('input').map((input)=>{return input.props().value})
 
-      expect(domElement.state("popUp")).toEqual(true);
+      expect(output).toEqual(Object.values(item1));
     });
   });
 });
-

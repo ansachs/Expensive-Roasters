@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import {observer, Provider, inject} from 'mobx-react';
+import {observer, inject} from 'mobx-react';
 import {Row, Col} from 'react-bootstrap'
-
-// import MenuStore from '../stores/menuStore'
-
 
 import Category from '../components/editmenu/category'
 import AddItem from '../components/editmenu/addItem'
-import Tabulate from '../components/form/tabulate'
 
 
 
@@ -32,7 +28,6 @@ const EditMenu = inject('menu')(observer(class EditMenu extends Component {
   render() {
 
     const categoryView = this.props.menu.categories.map((category, index)=>{
-            // console.log(index)
             return (<Category category={category} count={index} key={index} items={this.props.menu.menuItems.get(category)} />)
 
             })
@@ -51,7 +46,7 @@ const EditMenu = inject('menu')(observer(class EditMenu extends Component {
         <Row>
           <Col xs={2} />
           <Col xs={5}>
-            {/*<Test />*/}
+            <h2>Edit Menu</h2>
             <ul style={{'listStyle':'none'}}>
               {categoryView}
             </ul>
