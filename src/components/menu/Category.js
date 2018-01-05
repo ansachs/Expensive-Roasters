@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
-import ItemView from './itemView'
 import {inject, observer} from 'mobx-react';
+
+import ItemView from './itemView'
 
 const Category = inject('menu')(observer(class Category extends Component {
 
-  
-
   render() {
-    // console.log(this.props.items.slice())
+
     return (
-      
       <div>
         <li> 
           <h2 className="menu-categories">{this.props.category}</h2>
           <ul style={{'listStyle':'none'}}>
             {this.props.items.map((item, index)=>{
-              return <ItemView item={item} count={index} key={index} category={this.props.category} />
+              return <ItemView 
+                item={item} 
+                count={index} 
+                key={index} 
+                category={this.props.category} />
             })}
           </ul>
         </li>

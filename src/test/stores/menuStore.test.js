@@ -1,4 +1,3 @@
-
 import MenuStore from '../../stores/menuStore';
 import {orderItem} from '../../stores/menuStore';
 import { action, useStrict } from 'mobx';
@@ -121,6 +120,4 @@ describe('MenuStore', () => {
       expect(menu.calculateOrderTotal()).toEqual(expect.objectContaining({pretax: orderTotal,tax: expect.any(Number) }))
     });
   });
-  
-
 });

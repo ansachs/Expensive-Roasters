@@ -17,23 +17,29 @@ var ItemView = inject('menu')(observer(class ItemView extends Component {
     this.setState({popUp:!this.state.popUp})
   }
 
-  // editItem(values) {
-  //     this.props.item['name'] = values['name'];
-  //     this.props.item['description'] = values['description'];
-  //     this.props.item['price'] = values['price'];
-  //     // this.props.category = values['category'];
-  // }
-
   render() {
-    const popUp = this.state.popUp ? <PopUpItem popUpState={()=>{this.toggleEditItem()}} item={this.props.item} category={this.props.category} newOrEdit={(values)=>{this.props.menu.editItem(this.props.item, values)}}/> : null
+    const popUp = this.state.popUp ? 
+      <PopUpItem 
+        popUpState={()=>{this.toggleEditItem()}}
+        item={this.props.item} 
+        category={this.props.category} 
+        newOrEdit={(values)=>{this.props.menu.editItem(this.props.item, values)}}/> 
+      : null
 
     return (
-      
       <li className="menu-items">
         <Row>
           <Col xs={2}></Col>
-          <Col xs={6} className="text-right" data-test="order-item" onDoubleClick={()=>{this.toggleEditItem()}}>{this.props.item['name']} - {this.props.item['description']} - {this.props.item['price']}</Col>
-          <Col xs={1} bsSize="small" onClick={()=>{this.props.menu.deleteItem(this.props.item)}}><Glyphicon glyph="remove" /></Col>
+          <Col xs={6} 
+            className="text-right" 
+            data-test="order-item" 
+            onDoubleClick={()=>{this.toggleEditItem()}}>{this.props.item['name']} - {this.props.item['description']} - {this.props.item['price']}
+          </Col>
+          <Col xs={1} 
+            bsSize="small" 
+            onClick={()=>{this.props.menu.deleteItem(this.props.item)}}>
+            <Glyphicon glyph="remove"/>
+          </Col>
           <Col xs={3}> </Col>
         </Row>
         {popUp}

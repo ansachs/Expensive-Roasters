@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import { findDOMNode } from 'react-dom';
-
 import { observable, useStrict, extendObservable, toJS} from 'mobx';
 import {observer, Provider} from 'mobx-react';
-
-import Summary from '../../../components/form/summary';
-
 import Adapter from 'enzyme-adapter-react-16'
 import Enzyme from "enzyme";
 import { shallow, simulate, mount } from 'enzyme'
-// import ReactDOMServer from 'react-dom/server';
-// import _ from 'lodash';
+
+import Summary from '../../../components/form/summary';
+
+
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -52,7 +50,7 @@ describe('Summary', () => {
 
   });
 
-  describe('summary', () => {
+  describe('Summary', () => {
     it('allows you select a tip, for instance 10%', () => {
 
       const domElement = shallow (

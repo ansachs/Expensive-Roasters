@@ -3,11 +3,7 @@ import {Row, Col} from 'react-bootstrap'
 import {observer, inject} from 'mobx-react';
 
 import Category from '../components/menu/category'
-// import MenuStore from '../stores/menuStore'
-
 import Tabulate from '../components/form/tabulate'
-
-
 
 
 const Menu = inject('menu')(observer(class Menu extends Component {
@@ -23,15 +19,18 @@ const Menu = inject('menu')(observer(class Menu extends Component {
   }
 
   render() {
-    // const categories = MenuStore.menuItems.keys()
+
     const categoryView = this.props.menu.categories.map((category, index)=>{
             return (
-              <Category category={category} count={index} key={index} items={this.props.menu.menuItems.get(category)} />
+              <Category 
+                category={category} 
+                count={index} 
+                key={index} 
+                items={this.props.menu.menuItems.get(category)} />
               )
             })
 
-    return (  
-      
+    return (     
         <Row>
           <Col xs={2}>
           </Col>
@@ -46,8 +45,7 @@ const Menu = inject('menu')(observer(class Menu extends Component {
           </Col>
           <Col xs={2}>
           </Col >
-        </Row>
-      
+        </Row> 
     );
   }
 }))

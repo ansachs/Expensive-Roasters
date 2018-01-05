@@ -1,17 +1,16 @@
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import { findDOMNode } from 'react-dom';
-
 import { observable, useStrict, extendObservable, toJS} from 'mobx';
 import {observer, Provider} from 'mobx-react';
-
-import Menu from '../../../pages/menu';
-
 import Adapter from 'enzyme-adapter-react-16'
 import Enzyme from "enzyme";
 import { shallow, simulate, mount } from 'enzyme'
-// import ReactDOMServer from 'react-dom/server';
-// import _ from 'lodash';
+
+import Menu from '../../../pages/menu';
+
+
+
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -83,5 +82,4 @@ describe('Menu', () => {
       expect(itemText).toContain('subtotal$10tax$0.70total$10.70');
     });
   });
-
 });

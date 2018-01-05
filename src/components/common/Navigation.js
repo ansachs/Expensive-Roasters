@@ -44,7 +44,6 @@ export default withAuth(class Navigation extends Component{
               <li><Link to="editmenu">Edit Menu</Link></li>
               <li><a href="mailto:ansachs@gmail.com">Contact</a></li>
               {logged}
-              {/*<li><Link to="login">Login</Link></li>*/}
             </ul>
           </div>
         </div>

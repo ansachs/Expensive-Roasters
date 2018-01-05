@@ -6,11 +6,12 @@ import PopUpItem from './popUpItem'
 
 var AddItem = inject('menu')(observer(class AddItem extends Component {
   render() {
-    console.log('this is crap')
     return (
-      
       <div>
-        <PopUpItem popUpState={()=>{this.props.popUpState()}} newOrEdit={(value)=>{this.props.menu.newItem(value)}}/>
+        <PopUpItem 
+          popUpState={()=>{this.props.popUpState()}} 
+          newOrEdit={(value)=>{this.props.menu.newItem(value)}}
+        />
       </div>
     );
   }

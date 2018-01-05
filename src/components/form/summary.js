@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {inject, observer} from 'mobx-react';
 import {Row, Table, ButtonToolbar, Button} from 'react-bootstrap'
+
 import '../../styles/summary.css'
 
 
@@ -12,12 +13,6 @@ const Summary = inject('menu')(observer(class Tabulate extends Component {
       tip: 1
     }
   }
-
-
-  
-
-
-
   
   render() {
     const orderTotal = this.props.menu.calculateOrderTotal()
@@ -65,13 +60,9 @@ const Summary = inject('menu')(observer(class Tabulate extends Component {
       </Row>
     </div>
     )
-    return(this.props.menu.order.slice().length > 0 ? form : null)
 
-    // return (
-    //   {orderSummary}
-    // )
+    return(this.props.menu.order.slice().length > 0 ? form : null)
   }
 }))
-
 
 export default Summary;

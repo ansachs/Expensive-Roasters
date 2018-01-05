@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { modal, bootForm } from '../reusables/mixed'
-
 import {inject, observer} from 'mobx-react';
+
+import { modal, bootForm } from '../reusables/mixed'
 
 var PopUpItem = inject('menu')(observer(class PopUpItem extends Component {
   constructor(props) {
@@ -34,17 +34,13 @@ var PopUpItem = inject('menu')(observer(class PopUpItem extends Component {
   }
 
   render() {
-    
     const body = (
       <form>
          {["category", "name", "description", "price"].map((key)=>{ return bootForm(key, this.state[key], (event)=>{this.handleEvent(event)})})}
       </form>
     )
-
     const popUp = modal('Add a new Item', body, (values = this.state)=>{this.props.newOrEdit(values)}, ()=>{this.props.popUpState()})
-
     return (
-      
       <div>
         {popUp}
       </div>

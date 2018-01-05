@@ -1,17 +1,14 @@
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import { findDOMNode } from 'react-dom';
-
 import { observable, useStrict, extendObservable, toJS} from 'mobx';
 import {observer, Provider} from 'mobx-react';
-
-import PopUpItem from '../../../components/editmenu/PopUpItem';
-
 import Adapter from 'enzyme-adapter-react-16'
 import Enzyme from "enzyme";
 import { shallow, simulate, mount } from 'enzyme'
-// import ReactDOMServer from 'react-dom/server';
-// import _ from 'lodash';
+
+import PopUpItem from '../../../components/editmenu/PopUpItem';
+
 
 Enzyme.configure({ adapter: new Adapter() })
 

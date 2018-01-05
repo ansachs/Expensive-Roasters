@@ -3,19 +3,19 @@ import StartMenu from "../data/menu.json"
 
 export const tax = .07;
 
+
 class MenuStore {
   menuItems = observable.map({});
   categories = observable([]);
   order = observable([]);
 
 
-  constructor(startMenu) {
+  constructor() {
       this.loadMenu(StartMenu)
-      // console.log(this.menuItems);
   }
 
   loadMenu(startMenu) {
-    for (let category in startMenu) {
+    Object.keys(startMenu).forEach((category)=>{
       this.categories.push(category)
       let tempArray = []
       startMenu[category].forEach((item)=>{
@@ -23,7 +23,7 @@ class MenuStore {
         tempArray.push(newItem)
       })
       this.menuItems.set(category, tempArray)
-    }
+    })
   }
 
   checkInvalid(name) {
@@ -32,13 +32,6 @@ class MenuStore {
     } 
     return false;
   }
-
-    // checkNaN(number) {
-    //   if (isNaN(number)) {
-    //     return true;
-    //   } 
-    //   return false;
-    // }
 
   newItem(itemInfo){
 
@@ -125,8 +118,6 @@ class MenuStore {
       let newOrderItem = new orderItem(item)
       this.order.push(newOrderItem)
     }
-    // console.log(this.order.slice())
-    // console.log(isObservableArray(this.order))
   }
 
   addOrderQuantity(index) {

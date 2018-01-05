@@ -6,8 +6,6 @@ import Category from '../components/editmenu/category'
 import AddItem from '../components/editmenu/addItem'
 
 
-
-
 const EditMenu = inject('menu')(observer(class EditMenu extends Component {
   constructor(props){
     super(props);
@@ -28,15 +26,23 @@ const EditMenu = inject('menu')(observer(class EditMenu extends Component {
   render() {
 
     const categoryView = this.props.menu.categories.map((category, index)=>{
-            return (<Category category={category} count={index} key={index} items={this.props.menu.menuItems.get(category)} />)
-
+            return (<Category 
+              category={category} 
+              count={index} 
+              key={index} 
+              items={this.props.menu.menuItems.get(category)} />)
             })
 
     const addItemButton = (
-      <button onClick={()=>{this.toggleAddItem()}}>click to add an item</button>
+      <button 
+        onClick={()=>{this.toggleAddItem()}}>click to add an item
+      </button>
       )
+
     const addCategoryButton = (
-      <button onClick={()=>{this.addCategory()}}>click to add a category</button>
+      <button 
+        onClick={()=>{this.addCategory()}}>click to add a category
+      </button>
       )
     
     const popUp = this.state.popUp ? <AddItem popUpState={()=>{this.toggleAddItem()}}/> : null

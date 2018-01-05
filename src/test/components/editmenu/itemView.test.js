@@ -1,21 +1,18 @@
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import { findDOMNode } from 'react-dom';
-
 import { observable, useStrict, extendObservable, toJS} from 'mobx';
 import {observer, Provider} from 'mobx-react';
-
-import ItemView from '../../../components/editmenu/itemView';
-
 import Adapter from 'enzyme-adapter-react-16'
 import Enzyme from "enzyme";
 import { shallow, simulate, mount } from 'enzyme'
-// import ReactDOMServer from 'react-dom/server';
-// import _ from 'lodash';
+
+import ItemView from '../../../components/editmenu/itemView';
+
 
 Enzyme.configure({ adapter: new Adapter() })
 
-describe('EditMenu', () => {
+describe('ItemView', () => {
   let testmenu;
   let component;
   let domElement;

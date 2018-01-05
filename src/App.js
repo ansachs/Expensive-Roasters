@@ -14,6 +14,7 @@ import Login from './components/auth/Login';
 
 import Navigation from './components/common/Navigation';
 import MenuStore from './stores/menuStore'
+// import './.env'
 
 
 function onAuthRequired({history}) {
@@ -23,12 +24,12 @@ function onAuthRequired({history}) {
 
 class App extends Component {
   render() {
+    // console.log(process.env.REACT_APP_SECURITY_ISSUER)
     return (
       <Provider menu={MenuStore} > 
         <section className="App">
           <BrowserRouter>
             <div>
-              {/*<Navigation />*/}
               <Security issuer='https://dev-329566.oktapreview.com/oauth2/default'
                       client_id='0oadfqpihgL4hq5qw0h7'
                       redirect_uri={window.location.origin + '/implicit/callback'}

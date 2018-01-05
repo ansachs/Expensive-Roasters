@@ -11,19 +11,17 @@ const Menu = inject('menu')(observer(class Menu extends Component {
   }
 
   render() {
-    // console.log(this.props)
-    // console.log(this.props.menu.menuItems) 
-    // const test = =>{return(MenuStore)}))
-
-    // console.log(this.props.items)
-    return (
-      
+    return (   
       <div>
         <li> 
           <h2 onDoubleClick={(event)=>{this.changeCategory()}} className="menu-categories">{this.props.category}</h2>
           <ul style={{'listStyle':'none'}}>
             {this.props.items.map((item, index)=>{
-              return <ItemView item={item} count={index} key={index} category={this.props.category} />
+              return <ItemView 
+                item={item} 
+                count={index} 
+                key={index} 
+                category={this.props.category} />
             })}
           </ul>
         </li>
