@@ -16,16 +16,21 @@ import MenuStore from './stores/menuStore'
 import StartMenu from "./data/menu.json"
 
 
-function onAuthRequired({history}) {
-  history.push('/login');
-}
+function onAuthRequired({history}){
+  setTimeout(function(){history.push('/login')}, 100)
+  } 
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state ={
+      store: new MenuStore(StartMenu)
+    }
+  }  
 
-  render() {
-    const store = new MenuStore(StartMenu)
+  render() { 
     return (
-      <Provider menu={store} > 
+      <Provider menu={this.state.store} > 
         <section className="App">
           <BrowserRouter>
             <div>

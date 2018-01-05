@@ -32,7 +32,7 @@ const Summary = inject('menu')(observer(class Tabulate extends Component {
     const form = (
     <div>
       <Table striped bordered condensed hover data-test="order-summary">
-        <thead style={{ 'borderBottom': '3'+'px', 'borderStyle':'solid'}}>
+        <thead style={{ 'borderBottom': '3px', 'borderStyle':'solid'}}>
           <tr>
             <th>subtotal</th>
             <td>${orderTotal.pretax}</td>

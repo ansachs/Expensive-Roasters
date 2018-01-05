@@ -6,6 +6,8 @@ export default withAuth(class Navigation extends Component{
   constructor(props) {
     super(props);
     this.state = { authenticated: null };
+    this.checkAuthentication = this.checkAuthentication.bind(this);
+    this.checkAuthentication();
   }
 
   async checkAuthentication() {
