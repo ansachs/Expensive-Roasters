@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import './styles/App.css';
 
 import { Provider} from 'mobx-react';
-import Devtools from 'mobx-react-devtools'
 
 import { Security, SecureRoute, ImplicitCallback } from '@okta/okta-react';
 
@@ -14,29 +13,29 @@ import Login from './components/auth/Login';
 
 import Navigation from './components/common/Navigation';
 import MenuStore from './stores/menuStore'
-// import './.env'
+import StartMenu from "./data/menu.json"
 
 
 function onAuthRequired({history}) {
-  console.log(history)
   history.push('/login');
 }
 
 class App extends Component {
+
   render() {
-    // console.log(process.env.REACT_APP_SECURITY_ISSUER)
+    const store = new MenuStore(StartMenu)
     return (
-      <Provider menu={MenuStore} > 
+      <Provider menu={store} > 
         <section className="App">
           <BrowserRouter>
             <div>
-              <Security issuer='https://dev-329566.oktapreview.com/oauth2/default'
-                      client_id='0oadfqpihgL4hq5qw0h7'
+              <Security issuer={process.env.REACT_APP_SECURITY_ISSUER}
+                      client_id={process.env.REACT_APP_CLIENT_ID}
                       redirect_uri={window.location.origin + '/implicit/callback'}
                       onAuthRequired={onAuthRequired} >
                 <Route path='/' component={Navigation} />     
                 <Route path='/' exact={true} component={Menu} />
-                <Route path='/login' render={() => <Login baseUrl='https://dev-329566.oktapreview.com' />} />
+                <Route path='/login' render={() => <Login baseUrl={process.env.REACT_APP_BASE_URL} />} />
                 <SecureRoute path='/editmenu' component={EditMenu} />
                 <Route path='/implicit/callback' component={ImplicitCallback} />
                 <Route path='/menu' component={Menu} />

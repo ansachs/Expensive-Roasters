@@ -1,8 +1,7 @@
 import {observable, extendObservable} from 'mobx';
-import StartMenu from "../data/menu.json"
 
 export const tax = .07;
-
+export let keyCounter = 0;
 
 class MenuStore {
   menuItems = observable.map({});
@@ -10,17 +9,17 @@ class MenuStore {
   order = observable([]);
 
 
-  constructor() {
-      this.loadMenu(StartMenu)
+  constructor(startMenu) {
+      this.loadMenu(startMenu)
   }
 
   loadMenu(startMenu) {
     Object.keys(startMenu).forEach((category)=>{
-      this.categories.push(category)
-      let tempArray = []
+      this.categories.push(category);
+      let tempArray = [];
       startMenu[category].forEach((item)=>{
-        let newItem = new Item(category, item['name'], item['description'], item['price'])
-        tempArray.push(newItem)
+        let newItem = new Item(category, item['name'], item['description'], item['price']);
+        tempArray.push(newItem);
       })
       this.menuItems.set(category, tempArray)
     })
@@ -36,15 +35,16 @@ class MenuStore {
   newItem(itemInfo){
 
     if (this.menuItems.has(itemInfo["name"])) {
-      alert("please add an item with a unique name")
+      alert("please add an item with a unique name");
     } else if (this.checkInvalid(itemInfo["category"]) || this.checkInvalid(itemInfo["name"]) || this.checkInvalid(itemInfo["description"]) || isNaN(itemInfo["price"])) {
-      alert("all values must be valid")
+      alert("all values must be valid");
     } else {
       const newItem = new Item(itemInfo["category"], itemInfo["name"], itemInfo["description"], itemInfo["price"])
       if (!this.menuItems.has(itemInfo["category"])) {
         this.newCategory(itemInfo["category"])
       } 
-      this.menuItems.get(itemInfo["category"]).push(newItem)
+      this.menuItems.get(itemInfo["category"]).push(newItem);
+      return newItem;
     }
   }
 
@@ -78,15 +78,17 @@ class MenuStore {
     } else {
       let newItem = new Item(replaceItem["category"], replaceItem["name"], replaceItem["description"], replaceItem["price"]);
       let index = this.menuItems.get(oldItem["category"]).find((item)=>item["name"] === oldItem["name"])
-      if(!this.menuItems.has(newItem["category"])) {
+      if (oldItem["category"] !== newItem["category"]) {
+        if(!this.menuItems.has(newItem["category"])) {
           this.newCategory(newItem["category"]);
           this.categories.push(newItem["category"]);
           this.menuItems.get(newItem["category"]).push(newItem);
-
-      } else if (oldItem["category"] !== newItem["category"]) {
+        } else {
           this.menuItems.get(newItem["category"]).push(newItem);
+        }
           let oldItems = this.menuItems.get(oldItem["category"]).slice()
           oldItems.splice(index, 1)
+          this.menuItems.set(oldItem["category"], oldItems)
       } else {
         let oldItems = this.menuItems.get(oldItem["category"]).slice()
         oldItems.splice(index, 1, newItem)
@@ -97,18 +99,18 @@ class MenuStore {
 
   deleteItem(item) {
     let index = this.findMenuItem(item);
-    let modifiedItems = this.menuItems.get(item["category"]).slice().splice(index, 1);
+    let modifiedItems = this.menuItems.get(item["category"]).slice()
+    modifiedItems.splice(index, 1);
     this.menuItems.set(item["category"], modifiedItems);
   }
 
   findMenuItem(item) {
-    return this.menuItems.get(item["category"]).findIndex((menuItem)=>menuItem["name"] === item["name"]) - 1
+    return this.menuItems.get(item["category"]).findIndex((menuItem) => menuItem["name"] === item["name"])
   }
 
   findItem(item){
     return this.order.findIndex((items) => {return (items['name'] === item['name'])}) 
   }
-
 
   addOrderItem(item) {
     let index = this.findItem(item)
@@ -151,6 +153,7 @@ export class Item {
       this.name = name;
       this.description = description;
       this.price = price;
+      this.uniqueID = keyCounter ++; 
     }
 }
 
@@ -162,8 +165,8 @@ export class orderItem{
     this.name = item["name"];
     this.price = item["price"];
     this.quantity = quantity
+    this.uniqueID = keyCounter ++;
   }
 }
 
-
-export default new MenuStore(StartMenu);
+export default MenuStore;

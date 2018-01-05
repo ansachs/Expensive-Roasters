@@ -19,7 +19,10 @@ render() {
   const orderItems = (
     <ul style={{'listStyle':'none'}}>
               {this.props.menu.order.map((item, index)=>{
-                return <ItemView item={item} key={index} count={index} />
+                return <ItemView 
+                  item={item} 
+                  key={item.uniqueID} 
+                  count={index} />
               })}
     </ul>
   )

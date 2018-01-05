@@ -20,7 +20,7 @@ const Menu = inject('menu')(observer(class Menu extends Component {
               return <ItemView 
                 item={item} 
                 count={index} 
-                key={index} 
+                key={item.uniqueID}
                 category={this.props.category} />
             })}
           </ul>

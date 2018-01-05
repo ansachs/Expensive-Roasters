@@ -18,12 +18,14 @@ describe('EditMenu', () => {
   let component;
   let domElement;
 
-  let item1 = {"category": "appetizers", "name": "shrimp lo mein", "description": "stir fried noodles with shrimp", "price": "5.00" };
-  let item2 = {category: "beef", name: "Ginger Beef", description: "gingery beef", price: "1.00"}
+  let item1 = {"category": "appetizers", "name": "shrimp lo mein", "description": "stir fried noodles with shrimp", "price": "5.00", uniqueID: 1 };
+  let item2 = {category: "beef", name: "Ginger Beef", description: "gingery beef", price: "1.00", uniqueID: 2}
 
-  let item3 = {category: "beef", name: "pasta", description: "spicy pasta", price: "2.00"}
+  let item3 = {category: "beef", name: "pasta", description: "spicy pasta", price: "2.00", uniqueID: 3}
 
-  let orderItem1 = {category: "appetizers", name: "shrimp lo mein", price: "5.00", quantity: 2 }
+  let orderItem1 = {category: "appetizers", name: "shrimp lo mein", price: "5.00", quantity: 2, uniqueID: 4 }
+
+  let orderItem2 = {category: "beef", name: "beef stir-fry", price: "2.00", quantity: 3, uniqueID: 5 }
 
   let getItems = function() {
     const nonObsMenu = toJS(testmenu.menuItems);

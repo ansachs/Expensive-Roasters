@@ -25,7 +25,7 @@ const Summary = inject('menu')(observer(class Tabulate extends Component {
         </tr>
     )}
 
-    const total = (orderTotal.pretax * orderTotal.tax + orderTotal.pretax * this.state.tip).toFixed(2)  
+    const total = (orderTotal.pretax * orderTotal.tax + orderTotal.pretax * (1 + this.state.tip)).toFixed(2)  
 
     const withTip = (this.state.tip === 1 ? null : addTip(this.state.tip))
 
@@ -53,9 +53,9 @@ const Summary = inject('menu')(observer(class Tabulate extends Component {
       <Row>
         <div>Optional tip: </div>
         <ButtonToolbar id="button-bar">
-          <Button onClick={()=>{this.setState({tip: 1.10})}} bsSize="small">10%</Button>
-          <Button onClick={()=>{this.setState({tip: 1.15})}} bsSize="small">15%</Button>
-          <Button onClick={()=>{this.setState({tip: 1.20})}} bsSize="small">20%</Button>
+          <Button onClick={()=>{this.setState({tip: 0.10})}} bsSize="small">10%</Button>
+          <Button onClick={()=>{this.setState({tip: 0.15})}} bsSize="small">15%</Button>
+          <Button onClick={()=>{this.setState({tip: 0.20})}} bsSize="small">20%</Button>
         </ButtonToolbar>
       </Row>
     </div>

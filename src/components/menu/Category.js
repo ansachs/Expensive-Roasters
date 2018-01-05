@@ -17,7 +17,7 @@ const Category = inject('menu')(observer(class Category extends Component {
                 item={item} 
                 count={index} 
                 key={index} 
-                category={this.props.category} />
+                category={this.props.category}/>
             })}
           </ul>
         </li>
