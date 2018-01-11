@@ -12,6 +12,8 @@ login with
 name: alexlathan2@gmail.com
 pass: CodePlatoon1
 
+**self registration in okta is still in Beta testing and was not accessible under the free preview account**
+
 **Tip 1:** in edit mode: double click on an item to edit its properties
 
 **Tip 2:** in edit mode: click on a category title to edit the name
