@@ -6,6 +6,8 @@ A simple menu app built with React using Okta for authentication and mobx for a 
 
 run `npm install ; npm run start`
 
+**make sure you are accessing the site from `localhost:3000` as Okta will not authenticate other origins**
+
 login with
 name: alexlathan2@gmail.com
 pass: CodePlatoon1

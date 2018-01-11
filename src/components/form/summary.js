@@ -10,7 +10,7 @@ const Summary = inject('menu')(observer(class Tabulate extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      tip: 1
+      tip: 0
     }
   }
   
@@ -27,7 +27,7 @@ const Summary = inject('menu')(observer(class Tabulate extends Component {
 
     const total = (orderTotal.pretax * orderTotal.tax + orderTotal.pretax * (1 + this.state.tip)).toFixed(2)  
 
-    const withTip = (this.state.tip === 1 ? null : addTip(this.state.tip))
+    const withTip = (this.state.tip === 0 ? null : addTip(this.state.tip))
 
     const form = (
     <div>

@@ -60,7 +60,7 @@ describe('Summary', () => {
  
       domElement.find('Button').first().simulate('click') 
 
-      expect(domElement.state("tip")).toEqual(1.1);
+      expect(domElement.state("tip")).toEqual(0.1);
     });
   });
 });
